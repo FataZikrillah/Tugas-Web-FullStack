@@ -46,6 +46,8 @@ class MemberController extends Controller
     public function destroy($id)
     {
         Member::destroy($id);
-        return response()->json(null, 204);
+        return response()->json([
+            'message' => 'Data berhasil dihapus',
+        ], 200);
     }
 }

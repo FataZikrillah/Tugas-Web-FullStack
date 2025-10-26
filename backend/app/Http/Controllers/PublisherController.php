@@ -37,6 +37,8 @@ class PublisherController extends Controller
     public function destroy($id)
     {
         Publisher::destroy($id);
-        return response()->json(null, 204);
+        return response()->json([
+            'message' => 'Data berhasil dihapus',
+        ], 200);
     }
 }

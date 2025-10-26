@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Book;
@@ -18,7 +19,7 @@ class BookController extends Controller
             'author_id' => 'required|exists:authors,id',
             'publisher_id' => 'required|exists:publishers,id',
         ]);
-        
+
         $book = Book::create($request->all());
         return response()->json($book, 201);
     }
@@ -39,6 +40,8 @@ class BookController extends Controller
     public function destroy($id)
     {
         Book::destroy($id);
-        return response()->json(null, 204);
+        return response()->json([
+            'message' => 'Data berhasil dihapus',
+        ], 200);
     }
 }

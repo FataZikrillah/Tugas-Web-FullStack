@@ -37,6 +37,8 @@ class AuthorController extends Controller
     public function destroy($id)
     {
         Author::destroy($id);
-        return response()->json(null, 204);
+        return response()->json([
+            'message' => 'Data berhasil dihapus',
+        ], 200);
     }
 }
