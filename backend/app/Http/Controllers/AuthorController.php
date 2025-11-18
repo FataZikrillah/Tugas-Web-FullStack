@@ -18,25 +18,41 @@ class AuthorController extends Controller
         ]);
         
         $author = Author::create($request->all());
-        return response()->json($author, 201);
+        return response()->json([
+            'message' => 'Data berhasil ditambahkan',
+            'data' => $author
+        ], 201);
     }
 
     public function show($id)
     {
         $author = Author::findOrFail($id);
+        if (!$author) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
         return response()->json($author, 200);
     }
 
     public function update(Request $request, $id)
     {
         $author = Author::findOrFail($id);
+        if (!$author) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
         $author->update($request->all());
-        return response()->json($author, 200);
+        return response()->json([
+            'message' => 'Data berhasil diupdate',
+            'data' => $author
+        ], 200);
     }
 
     public function destroy($id)
     {
-        Author::destroy($id);
+        $author = Author::findOrFail($id);
+        if (!$author) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+        $author->delete();
         return response()->json([
             'message' => 'Data berhasil dihapus',
         ], 200);

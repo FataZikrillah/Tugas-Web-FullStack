@@ -17,6 +17,14 @@ class PublisherSeeder extends Seeder
         DB::table('publishers')->insert([
             ['name' => 'Gramedia'],
             ['name' => 'Mizan'],
+            ['name' => 'Bentang Pustaka'],
+            ['name' => 'Salina Aja'],
+            ['name' => 'Republika'],
+            ['name' => 'Penerbit Buku Kompas'],
+            ['name' => 'Elex Media Komputindo'],
+            ['name' => 'Kepustakaan Populer Gramedia'],
+            ['name' => 'Penerbit Haru'],
+            ['name' => 'Alma Mater'],
         ]);
     }
 }

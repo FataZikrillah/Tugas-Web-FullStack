@@ -8,14 +8,21 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::apiResource('members', MemberController::class);
-Route::apiResource('authors', AuthorController::class);
-Route::apiResource('publishers', PublisherController::class);
-Route::apiResource('books', BookController::class);
-Route::apiResource('loans', LoanController::class);
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::apiResource('members', MemberController::class);
+    Route::apiResource('authors', AuthorController::class);
+    Route::apiResource('publishers', PublisherController::class);
+    Route::apiResource('books', BookController::class);
+    Route::apiResource('loans', LoanController::class);
+});

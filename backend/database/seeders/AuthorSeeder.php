@@ -17,6 +17,14 @@ class AuthorSeeder extends Seeder
         DB::table('authors')->insert([
             ['name' => 'Tere Liye'],
             ['name' => 'Andrea Hirata'],
+            ['name' => 'Eka Kurniawan'],
+            ['name' => 'Habiburrahman El Shirazy'],
+            ['name' => 'Dewi Lestari'],
+            ['name' => 'Ahmad Fuadi'],
+            ['name' => 'Laila S. Chudori'],
+            ['name' => 'Raditya Dika'],
+            ['name' => 'Mia Arsjad'],
+            ['name' => 'Fahd Pahdepie'],
         ]);
     }
 }

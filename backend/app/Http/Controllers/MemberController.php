@@ -14,8 +14,8 @@ class MemberController extends Controller
     {
         $members = Member::all();
         return response()->json([
-            'Member' => $members,
             'message' => 'Data Berhasil diambil',
+            'Member' => $members,
         ], 200);
     }
 
@@ -27,25 +27,41 @@ class MemberController extends Controller
             'phone' => 'required',
         ]);
         $member = Member::create($request->all());
-        return response()->json($member, 201);
+        return response()->json([
+            'message' => 'Data member berhasil ditambahkan',
+            'data' => $member
+        ], 201);
     }
 
     public function show($id)
     {
         $member = Member::findOrFail($id);
+        if (!$member) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
         return response()->json($member, 200);
     }
 
     public function update(Request $request, $id)
     {
         $member = Member::findOrFail($id);
+        if (!$member) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
         $member->update($request->all());
-        return response()->json($member, 200);
+        return response()->json([
+            'message' => 'Data member berhasil diupdate',
+            'data' => $member
+        ], 200);
     }
 
     public function destroy($id)
     {
-        Member::destroy($id);
+        $member = Member::findOrFail($id);
+        if (!$member) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+        $member->delete();
         return response()->json([
             'message' => 'Data berhasil dihapus',
         ], 200);

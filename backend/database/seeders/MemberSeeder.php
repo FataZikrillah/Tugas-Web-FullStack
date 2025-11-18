@@ -25,6 +25,46 @@ class MemberSeeder extends Seeder
                 'email' => 'budi@mail.com',
                 'phone' => '081987654'
             ],
+            [
+                'name' => 'Cici',
+                'email' => 'cici@mail.com',
+                'phone' => '081111222'
+            ],
+            [
+                'name' => 'Dedi',
+                'email' => 'dedi@mail.com',
+                'phone' => '081222333'
+            ],
+            [
+                'name' => 'Eka',
+                'email' => 'eka@mail.com',
+                'phone' => '081333444'
+            ],
+            [
+                'name' => 'Fajar',
+                'email' => 'fajar@mail.com',
+                'phone' => '081444555'
+            ],
+            [
+                'name' => 'Gina',
+                'email' => 'gina@mail.com',
+                'phone' => '081555666'
+            ],
+            [
+                'name' => 'Hadi',
+                'email' => 'hadi@mail.com',
+                'phone' => '081666777'
+            ],
+            [
+                'name' => 'Indah',
+                'email' => 'indah@mail.com',
+                'phone' => '081777888'
+            ],
+            [
+                'name' => 'Joko',
+                'email' => 'joko@mail.com',
+                'phone' => '081888999'
+            ],
         ]);
     }
 }

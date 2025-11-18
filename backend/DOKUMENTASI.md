@@ -10,6 +10,80 @@
 
 ---
 
+## 🔐 Authentication
+
+### Login (Admin)
+Melakukan autentikasi admin dan mendapatkan token Bearer untuk mengakses endpoint yang dilindungi.
+
+**Endpoint:** `POST /api/login`
+
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+```
+
+**Request Body:**
+```json
+{
+    "email": "admin@mail.com",
+    "password": "secret_password"
+}
+```
+
+**Response Success (200 OK):**
+```json
+{
+    "message": "Login success",
+    "token": "<plain-text-token>",
+    "user": {
+        "id": 1,
+        "name": "Admin",
+        "email": "admin@mail.com"
+    }
+}
+```
+
+Catatan: Salin nilai `token` dan gunakan sebagai header `Authorization: Bearer <token>` untuk request ke endpoint yang dilindungi `auth:sanctum`.
+
+### Register (Admin) — contoh (opsional)
+Jika Anda menyediakan endpoint registrasi, contoh formatnya adalah sebagai berikut. Perhatikan: proyek ini mungkin belum menyediakan route `/api/register`.
+
+**Endpoint:** `POST /api/register`
+
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+```
+
+**Request Body:**
+```json
+{
+    "name": "Admin",
+    "email": "admin@mail.com",
+    "password": "secret_password",
+    "password_confirmation": "secret_password"
+}
+```
+
+**Response Success (201 Created):**
+```json
+{
+    "id": 1,
+    "name": "Admin",
+    "email": "admin@mail.com",
+    "created_at": "2025-11-17T08:00:00.000000Z"
+}
+```
+
+Jika endpoint registrasi tidak tersedia, buat admin melalui seeder atau `php artisan tinker`:
+
+```
+\App\Models\Admin::create(['name' => 'Admin', 'email' => 'admin@mail.com', 'password' => bcrypt('secret_password')]);
+```
+
+
 ## 📋 Daftar Endpoint
 
 ### 1. Members (Anggota)
@@ -31,6 +105,7 @@ Mendapatkan semua data anggota perpustakaan.
 ```
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer <token>
 ```
 
 **Response Success (200 OK):**
@@ -58,6 +133,7 @@ Menambahkan anggota baru.
 ```
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer <token>
 ```
 
 **Request Body:**
@@ -109,6 +185,7 @@ Mendapatkan detail anggota berdasarkan ID.
 ```
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer <token>
 ```
 
 **Response Success (200 OK):**
@@ -141,6 +218,7 @@ Mengupdate data anggota.
 ```
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer <token>
 ```
 
 **Request Body:**
@@ -175,6 +253,7 @@ Menghapus data anggota.
 ```
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer <token>
 ```
 
 **Response Success (204 No Content):**
@@ -189,6 +268,13 @@ Content-Type: application/json
 ### 2.1 Get All Authors
 
 **Endpoint:** `GET /api/authors`
+ 
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Response Success (200 OK):**
 ```json
@@ -207,6 +293,13 @@ Content-Type: application/json
 ### 2.2 Create Author
 
 **Endpoint:** `POST /api/authors`
+
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Request Body:**
 ```json
@@ -234,6 +327,13 @@ Content-Type: application/json
 
 **Endpoint:** `GET /api/authors/{id}`
 
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
+
 **Response Success (200 OK):**
 ```json
 {
@@ -249,6 +349,13 @@ Content-Type: application/json
 ### 2.4 Update Author
 
 **Endpoint:** `PUT /api/authors/{id}` atau `PATCH /api/authors/{id}`
+
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Request Body:**
 ```json
@@ -273,6 +380,13 @@ Content-Type: application/json
 
 **Endpoint:** `DELETE /api/authors/{id}`
 
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
+
 **Response Success (204 No Content):**
 ```
 (No content returned)
@@ -285,6 +399,13 @@ Content-Type: application/json
 ### 3.1 Get All Publishers
 
 **Endpoint:** `GET /api/publishers`
+ 
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Response Success (200 OK):**
 ```json
@@ -303,6 +424,13 @@ Content-Type: application/json
 ### 3.2 Create Publisher
 
 **Endpoint:** `POST /api/publishers`
+
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Request Body:**
 ```json
@@ -330,6 +458,13 @@ Content-Type: application/json
 
 **Endpoint:** `GET /api/publishers/{id}`
 
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
+
 **Response Success (200 OK):**
 ```json
 {
@@ -345,6 +480,13 @@ Content-Type: application/json
 ### 3.4 Update Publisher
 
 **Endpoint:** `PUT /api/publishers/{id}` atau `PATCH /api/publishers/{id}`
+
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Request Body:**
 ```json
@@ -369,6 +511,13 @@ Content-Type: application/json
 
 **Endpoint:** `DELETE /api/publishers/{id}`
 
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
+
 **Response Success (204 No Content):**
 ```
 (No content returned)
@@ -381,6 +530,13 @@ Content-Type: application/json
 ### 4.1 Get All Books
 
 **Endpoint:** `GET /api/books`
+ 
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Response Success (200 OK):**
 ```json
@@ -401,6 +557,13 @@ Content-Type: application/json
 ### 4.2 Create Book
 
 **Endpoint:** `POST /api/books`
+
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Request Body:**
 ```json
@@ -446,6 +609,13 @@ Content-Type: application/json
 
 **Endpoint:** `GET /api/books/{id}`
 
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
+
 **Response Success (200 OK):**
 ```json
 {
@@ -463,6 +633,13 @@ Content-Type: application/json
 ### 4.4 Update Book
 
 **Endpoint:** `PUT /api/books/{id}` atau `PATCH /api/books/{id}`
+
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Request Body:**
 ```json
@@ -491,6 +668,13 @@ Content-Type: application/json
 
 **Endpoint:** `DELETE /api/books/{id}`
 
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
+
 **Response Success (204 No Content):**
 ```
 (No content returned)
@@ -503,6 +687,13 @@ Content-Type: application/json
 ### 5.1 Get All Loans
 
 **Endpoint:** `GET /api/loans`
+
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Response Success (200 OK):**
 ```json
@@ -524,6 +715,13 @@ Content-Type: application/json
 ### 5.2 Create Loan
 
 **Endpoint:** `POST /api/loans`
+
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Request Body:**
 ```json
@@ -572,6 +770,13 @@ Content-Type: application/json
 
 **Endpoint:** `GET /api/loans/{id}`
 
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
+
 **Response Success (200 OK):**
 ```json
 {
@@ -590,6 +795,13 @@ Content-Type: application/json
 ### 5.4 Update Loan (Return Book)
 
 **Endpoint:** `PUT /api/loans/{id}` atau `PATCH /api/loans/{id}`
+
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
 
 **Request Body:**
 ```json
@@ -620,6 +832,13 @@ Content-Type: application/json
 
 **Endpoint:** `DELETE /api/loans/{id}`
 
+**Request Headers:**
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+```
+
 **Response Success (204 No Content):**
 ```
 (No content returned)
@@ -648,6 +867,7 @@ Content-Type: application/json
 2. **Headers (untuk semua request):**
    - `Accept: application/json`
    - `Content-Type: application/json`
+    - `Authorization: Bearer <token>` (gunakan token hasil login)
 
 ### Contoh Testing Flow
 
@@ -778,6 +998,12 @@ Ambil screenshot dari Postman untuk setiap operasi berikut:
 - **Database:** MySQL/PostgreSQL/SQLite
 - **Testing Tool:** Postman
 - **PHP Version:** 8.2+
+
+---
+
+## 📊 Kesimpulan
+
+REST API Library Management System telah berhasil diimplementasikan dengan struktur yang lengkap dan terorganisir. Sistem ini menyediakan 5 resource utama (Members, Authors, Publishers, Books, dan Loans) dengan operasi CRUD lengkap yang dilindungi oleh autentikasi berbasis token Sanctum. Setiap endpoint telah diuji dan menghasilkan response yang sesuai dengan HTTP status code yang tepat (200 OK untuk read/update, 201 Created untuk create, 204 No Content untuk delete). Fitur eager loading relationship telah diterapkan pada Loans untuk menampilkan data member dan book secara bersamaan, sehingga mengurangi n+1 query problem. Validasi data input telah diterapkan pada semua endpoint POST dan PUT/PATCH dengan rules yang ketat (unique email, foreign key validation, date format checking). Dokumentasi API ini meliputi contoh request/response lengkap, error handling yang jelas, dan panduan testing di Postman, sehingga memudahkan developer dalam mengintegrasikan API ini ke aplikasi frontend atau mobile.
 
 ---
 

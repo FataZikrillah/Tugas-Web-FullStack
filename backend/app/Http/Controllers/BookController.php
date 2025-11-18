@@ -21,27 +21,43 @@ class BookController extends Controller
         ]);
 
         $book = Book::create($request->all());
-        return response()->json($book, 201);
+        return response()->json([
+            'message' => 'Data buku berhasil ditambahkan',
+            'data' => $book
+        ], 201);
     }
 
     public function show($id)
     {
         $book = Book::findOrFail($id);
+        if (!$book) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
         return response()->json($book, 200);
     }
 
     public function update(Request $request, $id)
     {
         $book = Book::findOrFail($id);
+        if (!$book) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
         $book->update($request->all());
-        return response()->json($book, 200);
+        return response()->json([
+            'message' => 'Data buku berhasil diupdate',
+            'data' => $book
+        ], 200);
     }
 
     public function destroy($id)
     {
-        Book::destroy($id);
+        $book = Book::findOrFail($id);
+        if (!$book) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+        $book->delete();
         return response()->json([
-            'message' => 'Data berhasil dihapus',
+            'message' => 'Data buku berhasil dihapus',
         ], 200);
     }
 }

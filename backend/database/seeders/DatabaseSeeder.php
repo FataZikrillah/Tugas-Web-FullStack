@@ -16,27 +16,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create('id_ID'); // Buat instance Faker dengan locale Indonesia
-
-        $users = [];
-        for ($i = 0; $i < 50; $i++) { // Ulangi untuk membuat 50 pengguna
-            $users[] = [
-                'name' => $faker->name,
-                'email' => $faker->unique()->email, // Gunakan unique() untuk memastikan email unik
-                'password' => Hash::make('password'), // Gunakan Hash::make() untuk hashing password
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-        }
-
-        DB::table('users')->insert($users); // Masukkan semua data sekaligus
-
-        // Tugas
+        // Panggil semua seeder
         $this->call([
             MemberSeeder::class,
             AuthorSeeder::class,
             PublisherSeeder::class,
             BookSeeder::class,
+            LoanSeeder::class,
+            AdminSeeder::class
         ]);
+        // $this->call(AdminSeeder::class);
     }
 }
